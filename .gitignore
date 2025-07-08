@@ -3,8 +3,12 @@
 *.swp
 *~
 
+# clangd
+/.cache
+
 # python
 .venv
+venv
 
 # build
 /build*
