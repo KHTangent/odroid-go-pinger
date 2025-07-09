@@ -1,0 +1,4 @@
+config ODROID_GO_BUTTONS
+	bool "Enable Odroid Go buttons"
+	default y
+

@@ -2,4 +2,5 @@
 # SPDX-License-Identifier: Apache-2.0
 
 menu "Drivers"
+rsource "odroid_go_buttons/Kconfig.odroid_go_buttons"
 endmenu
