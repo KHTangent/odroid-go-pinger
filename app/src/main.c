@@ -1,47 +1,39 @@
-/*
- * Copyright (c) 2016 Intel Corporation
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 #include <stdio.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
+#include <zephyr/zbus/zbus.h>
 
-/* 1000 msec = 1 sec */
-#define SLEEP_TIME_MS 1000
+#include "app/drivers/odroid_go_buttons.h"
 
-/* The devicetree node identifier for the "led0" alias. */
-#define LED0_NODE DT_ALIAS(led0)
+static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 
-/*
- * A build error on this line means your board is unsupported.
- * See the sample documentation for information on how to fix this.
- */
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
+void button_callback(const struct zbus_channel* channel) {
+	if (channel != &button_event_channel) {
+		return;
+	}
+	const struct ButtonEvent* event = zbus_chan_const_msg(channel);
+	printf("Received event with code %d\n", event->type);
+}
+
+ZBUS_LISTENER_DEFINE(button_observer, button_callback);
+ZBUS_CHAN_ADD_OBS(button_event_channel, ZBUS_OBSERVERS(button_observer), 0);
 
 int main(void) {
-	int ret;
-	bool led_state = true;
-
 	if (!gpio_is_ready_dt(&led)) {
 		return 0;
 	}
 
-	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
-	if (ret < 0) {
+	int pin_config_error = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
+	if (pin_config_error < 0) {
 		return 0;
 	}
 
 	while (1) {
-		ret = gpio_pin_toggle_dt(&led);
-		if (ret < 0) {
-			return 0;
-		}
-
-		led_state = !led_state;
-		printf("LED state: %s\n", led_state ? "ON" : "OFF");
-		k_msleep(SLEEP_TIME_MS);
+		// int pin_set_error = gpio_pin_toggle_dt(&led);
+		// if (pin_set_error < 0) {
+		// 	return 0;
+		// }
+		k_sleep(K_MSEC(100));
 	}
 	return 0;
 }
