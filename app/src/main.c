@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/zbus/zbus.h>
@@ -12,7 +11,16 @@ void button_callback(const struct zbus_channel* channel) {
 		return;
 	}
 	const struct ButtonEvent* event = zbus_chan_const_msg(channel);
-	printf("Received event with code %d\n", event->type);
+	switch (event->type) {
+		case BUTTON_A_PRESSED:
+			gpio_pin_set_dt(&led, 1);
+			break;
+		case BUTTON_A_RELEASED:
+			gpio_pin_set_dt(&led, 0);
+			break;
+		default:
+			break;
+	}
 }
 
 ZBUS_LISTENER_DEFINE(button_observer, button_callback);
@@ -27,12 +35,9 @@ int main(void) {
 	if (pin_config_error < 0) {
 		return 0;
 	}
+	gpio_pin_set_dt(&led, 0);
 
 	while (1) {
-		// int pin_set_error = gpio_pin_toggle_dt(&led);
-		// if (pin_set_error < 0) {
-		// 	return 0;
-		// }
 		k_sleep(K_MSEC(100));
 	}
 	return 0;
