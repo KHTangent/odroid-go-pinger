@@ -2,6 +2,7 @@
 .vscode
 *.swp
 *~
+/gui/gui.eez-project-ui-state
 
 # clangd
 /.cache
