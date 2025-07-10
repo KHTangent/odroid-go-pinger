@@ -1,0 +1,31 @@
+/ {
+	aliases {
+		dpad-adc = &adc0;
+		dpad-x-adc-channel = &adc0_ch6;
+		dpad-y-adc-channel = &adc0_ch7;
+	};
+};
+
+&adc0 {
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	adc0_ch6: channel@6 {
+		reg = <6>;
+		zephyr,gain = "ADC_GAIN_1_4";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,vref-mv = <3894>;
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+	};
+
+	adc0_ch7: channel@7 {
+		reg = <7>;
+		zephyr,gain = "ADC_GAIN_1_4";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,vref-mv = <3894>;
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,resolution = <12>;
+	};
+};
