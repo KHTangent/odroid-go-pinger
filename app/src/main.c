@@ -14,6 +14,7 @@ void button_callback(const struct zbus_channel* channel) {
 		return;
 	}
 	const struct ButtonEvent* event = zbus_chan_const_msg(channel);
+	printf("Received event %d\n", event->type);
 	switch (event->type) {
 		case BUTTON_A_PRESSED:
 			gpio_pin_set_dt(&led, 1);
