@@ -23,10 +23,51 @@ void create_screen_main() {
         lv_obj_t *parent_obj = obj;
         {
             lv_obj_t *obj = lv_label_create(parent_obj);
-            lv_obj_set_pos(obj, 77, 104);
+            lv_obj_set_pos(obj, 5, 173);
             lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_label_set_text(obj, "hello, world!");
+            lv_label_set_text(obj, "Odroid Go Pinger");
             lv_obj_set_style_text_font(obj, &ui_font_comic, LV_PART_MAIN | LV_STATE_DEFAULT);
+        }
+        {
+            // networks
+            lv_obj_t *obj = lv_list_create(parent_obj);
+            objects.networks = obj;
+            lv_obj_set_pos(obj, 117, 20);
+            lv_obj_set_size(obj, 180, 100);
+        }
+        {
+            // start scan button
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.start_scan_button = obj;
+            lv_obj_set_pos(obj, 5, 20);
+            lv_obj_set_size(obj, 100, 50);
+            add_style_buttons(obj);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 0, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_label_set_text(obj, "Scan");
+                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+                }
+            }
+        }
+        {
+            lv_obj_t *obj = lv_btn_create(parent_obj);
+            lv_obj_set_pos(obj, 5, 95);
+            lv_obj_set_size(obj, 100, 50);
+            add_style_buttons(obj);
+            {
+                lv_obj_t *parent_obj = obj;
+                {
+                    lv_obj_t *obj = lv_label_create(parent_obj);
+                    lv_obj_set_pos(obj, 0, 0);
+                    lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+                    lv_label_set_text(obj, "Stop");
+                    lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+                }
+            }
         }
     }
 }
