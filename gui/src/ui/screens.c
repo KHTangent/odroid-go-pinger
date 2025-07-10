@@ -10,14 +10,28 @@
 
 #include <string.h>
 
+groups_t groups;
+static bool groups_created = false;
+
 objects_t objects;
 lv_obj_t *tick_value_change_obj;
+
+static void event_handler_cb_main_main(lv_event_t *e) {
+    lv_event_code_t event = lv_event_get_code(e);
+    if (event == LV_EVENT_SCREEN_LOAD_START) {
+        // group: menu_buttons_group
+        lv_group_remove_all_objs(groups.menu_buttons_group);
+        lv_group_add_obj(groups.menu_buttons_group, objects.stop_scan_button);
+        lv_group_add_obj(groups.menu_buttons_group, objects.start_scan_button);
+    }
+}
 
 void create_screen_main() {
     lv_obj_t *obj = lv_obj_create(0);
     objects.main = obj;
     lv_obj_set_pos(obj, 0, 0);
     lv_obj_set_size(obj, 320, 240);
+    lv_obj_add_event_cb(obj, event_handler_cb_main_main, LV_EVENT_ALL, 0);
     lv_obj_set_style_bg_color(obj, lv_color_hex(0xff0066ff), LV_PART_MAIN | LV_STATE_DEFAULT);
     {
         lv_obj_t *parent_obj = obj;
@@ -54,7 +68,9 @@ void create_screen_main() {
             }
         }
         {
+            // stop scan button
             lv_obj_t *obj = lv_btn_create(parent_obj);
+            objects.stop_scan_button = obj;
             lv_obj_set_pos(obj, 5, 95);
             lv_obj_set_size(obj, 100, 50);
             add_style_buttons(obj);
@@ -76,7 +92,16 @@ void tick_screen_main() {
 }
 
 
+void ui_create_groups() {
+    if (!groups_created) {
+        groups.menu_buttons_group = lv_group_create();
+        groups_created = true;
+    }
+}
+
 void create_screens() {
+    ui_create_groups();
+    
     lv_disp_t *dispp = lv_disp_get_default();
     lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);

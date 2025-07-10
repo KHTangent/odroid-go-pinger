@@ -152,6 +152,13 @@ void odroid_go_buttons_task(void* p1, void* p2, void* p3) {
 	}
 }
 
+bool button_event_is_press(enum ButtonEventType event) {
+	return event <= 10;
+}
+bool button_event_is_release(enum ButtonEventType event) {
+	return event > 10;
+}
+
 INPUT_CALLBACK_DEFINE(buttons_input, odroid_go_button_event_callback, NULL);
 
 K_THREAD_DEFINE(ODROID_GO_BUTTONS_THREAD, 1024, odroid_go_buttons_task, NULL, NULL, NULL, 4, 0, 0);

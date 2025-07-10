@@ -305,7 +305,7 @@
               "localStyles": {
                 "objID": "4fa16bed-116a-466a-979c-240300542ffb"
               },
-              "group": "",
+              "group": "menu_buttons_group",
               "groupIndex": 0
             },
             {
@@ -325,6 +325,7 @@
               },
               "timeline": [],
               "eventHandlers": [],
+              "identifier": "stop scan button",
               "leftUnit": "px",
               "topUnit": "px",
               "widthUnit": "px",
@@ -396,8 +397,8 @@
               "localStyles": {
                 "objID": "2aa46472-eccf-474e-c84e-e43b6efd57ee"
               },
-              "group": "",
-              "groupIndex": 0
+              "group": "menu_buttons_group",
+              "groupIndex": 1
             }
           ],
           "widgetFlags": "CLICKABLE|PRESS_LOCK|CLICK_FOCUSABLE|GESTURE_BUBBLE|SNAPPABLE|SCROLLABLE|SCROLL_ELASTIC|SCROLL_MOMENTUM|SCROLL_CHAIN_HOR|SCROLL_CHAIN_VER",
@@ -464,7 +465,12 @@
   },
   "lvglGroups": {
     "objID": "f2f79c21-8769-ed90-c624-7405d4136ec9",
-    "groups": []
+    "groups": [
+      {
+        "objID": "5c00f1af-dc6d-4734-811e-36f4070794fc",
+        "name": "menu_buttons_group"
+      }
+    ]
   },
   "fonts": [
     {

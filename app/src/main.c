@@ -9,12 +9,11 @@
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 
-void button_callback(const struct zbus_channel* channel) {
+void button_callback_ui(const struct zbus_channel* channel) {
 	if (channel != &button_event_channel) {
 		return;
 	}
 	const struct ButtonEvent* event = zbus_chan_const_msg(channel);
-	printf("Received event %d\n", event->type);
 	switch (event->type) {
 		case BUTTON_A_PRESSED:
 			gpio_pin_set_dt(&led, 1);
@@ -27,8 +26,8 @@ void button_callback(const struct zbus_channel* channel) {
 	}
 }
 
-ZBUS_LISTENER_DEFINE(button_observer, button_callback);
-ZBUS_CHAN_ADD_OBS(button_event_channel, ZBUS_OBSERVERS(button_observer), 0);
+ZBUS_LISTENER_DEFINE(button_observer_ui, button_callback_ui);
+ZBUS_CHAN_ADD_OBS(button_event_channel, ZBUS_OBSERVERS(button_observer_ui), 0);
 
 int main(void) {
 	if (!gpio_is_ready_dt(&led)) {

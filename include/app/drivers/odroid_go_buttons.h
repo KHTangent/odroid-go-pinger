@@ -1,6 +1,7 @@
 #ifndef ODROID_GO_BUTTONS_H
 #define ODROID_GO_BUTTONS_H
 
+#include <stdbool.h>
 #include <zephyr/zbus/zbus.h>
 
 enum ButtonEventType {
@@ -27,6 +28,9 @@ enum ButtonEventType {
 	BUTTON_RIGHT_PRESSED = 10,
 	BUTTON_RIGHT_RELEASED = 1010,
 };
+
+bool button_event_is_press(enum ButtonEventType event);
+bool button_event_is_release(enum ButtonEventType event);
 
 struct ButtonEvent {
 	enum ButtonEventType type;
