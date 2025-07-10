@@ -55,6 +55,7 @@ void create_screen_main() {
             objects.start_scan_button = obj;
             lv_obj_set_pos(obj, 5, 20);
             lv_obj_set_size(obj, 100, 50);
+            lv_obj_add_event_cb(obj, action_scan_pressed, LV_EVENT_PRESSED, (void *)0);
             add_style_buttons(obj);
             {
                 lv_obj_t *parent_obj = obj;
@@ -73,6 +74,7 @@ void create_screen_main() {
             objects.stop_scan_button = obj;
             lv_obj_set_pos(obj, 5, 95);
             lv_obj_set_size(obj, 100, 50);
+            lv_obj_add_event_cb(obj, action_stop_scan_pressed, LV_EVENT_PRESSED, (void *)0);
             add_style_buttons(obj);
             {
                 lv_obj_t *parent_obj = obj;

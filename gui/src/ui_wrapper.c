@@ -5,8 +5,11 @@
 
 #include "app/drivers/odroid_go_buttons.h"
 #include "core/lv_group.h"
+#include "core/lv_obj_tree.h"
 #include "indev/lv_indev.h"
+#include "screens.h"
 #include "ui.h"
+#include "widgets/list/lv_list.h"
 
 static const struct device* display = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
 
@@ -73,6 +76,14 @@ void keypad_check_callback(lv_indev_t* indev, lv_indev_data_t* data) {
 		data->key = last_released_key;
 		data->state = LV_INDEV_STATE_RELEASED;
 	}
+}
+
+void action_scan_pressed(lv_event_t* e) {
+	lv_list_add_text(objects.networks, "New network!");
+}
+
+void action_stop_scan_pressed(lv_event_t* e) {
+	lv_obj_clean(objects.networks);
 }
 
 void ui_thread_task(void* p1, void* p2, void* p3) {

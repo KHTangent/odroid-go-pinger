@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+extern void action_scan_pressed(lv_event_t * e);
+extern void action_stop_scan_pressed(lv_event_t * e);
 
 
 #ifdef __cplusplus

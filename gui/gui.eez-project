@@ -105,7 +105,24 @@
     "structures": [],
     "enums": []
   },
-  "actions": [],
+  "actions": [
+    {
+      "objID": "29bd3607-5861-40d9-f755-88ed59335033",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "scan pressed"
+    },
+    {
+      "objID": "a0efdaba-54fb-434d-fb5a-b935bdb5e101",
+      "components": [],
+      "connectionLines": [],
+      "localVariables": [],
+      "userProperties": [],
+      "name": "stop scan pressed"
+    }
+  ],
   "userPages": [
     {
       "objID": "4b40eba7-b31a-468a-b887-11dfd0b6637f",
@@ -232,7 +249,15 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "f406e60e-3246-4185-a324-103c3749d9c8",
+                  "eventName": "PRESSED",
+                  "handlerType": "action",
+                  "action": "scan pressed",
+                  "userData": 0
+                }
+              ],
               "identifier": "start scan button",
               "leftUnit": "px",
               "topUnit": "px",
@@ -324,7 +349,15 @@
                 "childStyles": []
               },
               "timeline": [],
-              "eventHandlers": [],
+              "eventHandlers": [
+                {
+                  "objID": "da53ab68-952d-4b9c-fd8c-19fa77afbfb6",
+                  "eventName": "PRESSED",
+                  "handlerType": "action",
+                  "action": "stop scan pressed",
+                  "userData": 0
+                }
+              ],
               "identifier": "stop scan button",
               "leftUnit": "px",
               "topUnit": "px",
